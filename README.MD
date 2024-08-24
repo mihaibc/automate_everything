@@ -20,27 +20,27 @@ Automation is a powerful way to save time, reduce errors, and streamline process
 
 ## Languages and Use Cases
 
-### Python
+### [Python](/Python/README.md)
 - **Use Cases**: General-purpose automation, file management, web scraping, data processing, and system administration.
 - **Strengths**: Rich ecosystem, easy to learn, widely supported.
 
-### Go (Golang)
+### [Go (Golang)](/Go/README.md)
 - **Use Cases**: Cloud automation, CI/CD pipelines, and network automation.
 - **Strengths**: High performance, excellent for concurrent processing, ideal for cloud-native applications.
 
-### C++
+### [C++](/C++/README.md)
 - **Use Cases**: Performance-critical automation, low-level system tasks, and game development automation.
 - **Strengths**: High performance, low-level memory access, cross-platform capabilities.
 
-### Perl
+### [Perl](/Perl/README.md)
 - **Use Cases**: Text processing, system administration, and web scraping.
 - **Strengths**: Powerful text processing, great for legacy systems.
 
-### Bash
+### [Bash](/Bash/README.md)
 - **Use Cases**: Unix/Linux system administration, file management, and task scheduling.
 - **Strengths**: Excellent for quick automation on Unix/Linux systems, integrates well with system commands.
 
-### PowerShell
+### [PowerShell](/PowerShell/README.md)
 - **Use Cases**: Windows system administration, Active Directory management, and automating Windows-based applications.
 - **Strengths**: Deep integration with Windows, powerful scripting capabilities, access to .NET libraries.
 
@@ -65,45 +65,24 @@ Before you begin, ensure you have the required software installed based on the l
     cd automate-everything
     ```
 
-2. **Install the necessary dependencies**:
-    - For Python scripts: `pip install -r Python/requirements.txt`
-    - For Go scripts: Ensure the Go environment is set up properly.
-    - For C++ scripts: Compile the code as needed.
-    - Other languages typically don't require additional installation steps but check individual script folders for instructions.
+2. **Check each language instructions**:
+    - [Python](/Python/README.md)
+    - [Go (Golang)](/Go/README.md)
+    - [C++](/C++/README.md)
+    - [Perl](/Perl/README.md)
+    - [Bash](/Bash/README.md)
+    - [PowerShell](/PowerShell/README.md)
+
 
 ## Usage
 
-Each script is located in its respective language directory and comes with instructions on how to run it. Navigate to the relevant folder and follow the usage instructions in the script or accompanying documentation.
-
-### Example
-
-To run a Python script for moving files:
-
-```bash
-cd Python/file_management/
-python move_files.py
-```
-
-To compile and run a C++ script:
-
-```bash
-cd C++/performance_critical/
-g++ script_name.cpp -o script_name
-./script_name
-```
+Each script is located in its respective language directory and comes with instructions on how to run it.
 
 ## Contributing
 
-Contributions are welcome! If you have an automation script you'd like to share or improvements to suggest, please follow these steps:
+Contributions are welcome! 
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some feature'`)
-5. Push to the branch (`git push origin feature-branch`)
-6. Open a Pull Request
-
-Please ensure your code adheres to the repository's coding standards and includes appropriate documentation.
+If you have an automation script you'd like to share or improvements to suggest, please follow the contribution guidelines listed in the [CONTRIBUTING.md](CONTRIBUTING.md)  file.
 
 ## License
 
