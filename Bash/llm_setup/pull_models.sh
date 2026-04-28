@@ -100,6 +100,7 @@ main() {
     info "Results: ${#succeeded[@]} pulled, ${#failed[@]} failed"
     if (( ${#failed[@]} > 0 )); then
         warn "Failed models: ${failed[*]}"
+        return 1
     fi
 }
 

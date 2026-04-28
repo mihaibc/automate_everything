@@ -61,7 +61,7 @@ def cmd_index(args):
     }
 
     out_path = Path(args.output)
-    out_path.write_text(json.dumps(index), encoding="utf-8")
+    out_path.write_text(json.dumps(index, ensure_ascii=False), encoding="utf-8")
     print(f"Index saved to '{out_path}' ({len(files)} documents).", file=sys.stderr)
 
 
@@ -71,11 +71,22 @@ def cmd_search(args):
         print(f"Error: index file '{index_path}' not found. Run 'index' first.", file=sys.stderr)
         sys.exit(1)
 
-    index = json.loads(index_path.read_text(encoding="utf-8"))
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, KeyError):
+        print("Error: index file is corrupt or invalid. Re-run 'index' to rebuild.", file=sys.stderr)
+        sys.exit(1)
+
     stored_model = index["model"]
     documents = index["documents"]
 
     model_name = args.model or stored_model
+    if args.model and args.model != stored_model:
+        print(
+            f"Warning: search model '{args.model}' differs from index model '{stored_model}'. "
+            "Results may be inaccurate. Re-index with the same model to fix this.",
+            file=sys.stderr,
+        )
     model = get_model(model_name)
 
     raw_query = model.encode([args.query])[0]

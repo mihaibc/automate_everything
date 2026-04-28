@@ -24,7 +24,7 @@ def apply_vars(template: str, vars_list: list[str]) -> str:
             print(f"Warning: skipping malformed var '{entry}' (expected key=value)", file=sys.stderr)
             continue
         key, _, value = entry.partition("=")
-        replacements[key.strip()] = value.strip()
+        replacements[key.strip()] = value
 
     missing = set(re.findall(r"\{(\w+)\}", template)) - set(replacements.keys())
     if missing:

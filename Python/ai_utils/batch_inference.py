@@ -18,7 +18,12 @@ except ImportError:
 def load_prompts(path: str) -> list[dict]:
     """Load prompts from a JSONL file. Each line must be a JSON object with a 'messages' key."""
     prompts = []
-    with open(path, encoding="utf-8") as f:
+    try:
+        f_handle = open(path, encoding="utf-8")
+    except FileNotFoundError:
+        print(f"Error: input file '{path}' not found.", file=sys.stderr)
+        sys.exit(1)
+    with f_handle as f:
         for i, line in enumerate(f, 1):
             line = line.strip()
             if not line:
@@ -66,9 +71,9 @@ def run_single(
         # Extract content from OpenAI or Ollama response shapes
         content = None
         if "choices" in data:
-            content = data["choices"][0]["message"]["content"]
+            content = (data["choices"][0].get("message") or {}).get("content")
         elif "message" in data:
-            content = data["message"]["content"]
+            content = data["message"].get("content")
         elif "response" in data:
             content = data["response"]
 
@@ -100,7 +105,8 @@ def main():
 
 Examples:
   python batch_inference.py --input prompts.jsonl --output results.jsonl
-  python batch_inference.py --input prompts.jsonl --endpoint https://api.openai.com/v1 --model gpt-4o --api-key $OPENAI_API_KEY
+  python batch_inference.py --input prompts.jsonl --endpoint https://api.openai.com/v1 \\
+    --model gpt-4o --api-key $OPENAI_API_KEY
   python batch_inference.py --input prompts.jsonl --workers 8 --timeout 120""",
     )
     parser.add_argument("--input", required=True, help="Input JSONL file with prompts")
@@ -111,10 +117,15 @@ Examples:
         help="OpenAI-compatible API base URL (default: http://localhost:11434/v1)",
     )
     parser.add_argument("--model", default="llama3", help="Default model (default: llama3)")
-    parser.add_argument("--workers", type=int, default=4, help="Parallel workers (default: 4)")
+    parser.add_argument("--workers", type=int, default=4, metavar="N",
+                        help="Parallel workers, must be >= 1 (default: 4)")
     parser.add_argument("--timeout", type=int, default=60, help="Per-request timeout in seconds (default: 60)")
     parser.add_argument("--api-key", default="", help="API key (optional, for OpenAI etc.)")
     args = parser.parse_args()
+
+    if args.workers < 1:
+        print("Error: --workers must be >= 1", file=sys.stderr)
+        sys.exit(1)
 
     prompts = load_prompts(args.input)
     if not prompts:

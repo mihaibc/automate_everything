@@ -1,5 +1,6 @@
 import os
 
+
 def create_folder_structure(base_path, folder_structure):
     """
     Creates a folder structure based on the provided dictionary.
@@ -13,11 +14,10 @@ def create_folder_structure(base_path, folder_structure):
             os.makedirs(path, exist_ok=True)
             print(f"Created: {path}")
 
+
 if __name__ == "__main__":
-    # Define the base path where the folder structure will be created
     base_path = input("Enter the base path where the folder structure should be created: ").strip()
-    
-    # Define the folder structure
+
     folder_structure = {
         "Python": ["file_management", "web_scraping", "data_processing", "system_administration"],
         "Go": ["cloud_automation", "ci_cd"],
@@ -27,5 +27,4 @@ if __name__ == "__main__":
         "PowerShell": ["windows_automation", "system_administration", "active_directory"],
     }
 
-    # Create the folder structure
     create_folder_structure(base_path, folder_structure)

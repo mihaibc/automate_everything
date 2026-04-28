@@ -52,25 +52,32 @@ parse_args() {
 
 check_deps() {
     command -v curl &>/dev/null || die "'curl' is required but not installed"
+    command -v python3 &>/dev/null || die "'python3' is required but not installed"
 }
 
 check_server() {
-    curl -sf "$OLLAMA_HOST" &>/dev/null || \
+    curl -sf "$OLLAMA_HOST/api/tags" &>/dev/null || \
         die "Ollama server not reachable at $OLLAMA_HOST. Start it with 'ollama serve'."
 }
 
+# All JSON assembly is done in Python to correctly handle special characters,
+# quotes, and newlines in model names, prompts, and system messages.
 build_payload() {
-    local messages='[{"role":"user","content":'"$(printf '%s' "$PROMPT" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')"'}]'
-
-    if [[ -n "$SYSTEM" ]]; then
-        local sys_msg='{"role":"system","content":'"$(printf '%s' "$SYSTEM" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')"'}'
-        messages="[$sys_msg,$(echo "$messages" | sed 's/^\[//' | sed 's/\]$//')]"
-    fi
-
     local stream_val="false"
     $STREAM && stream_val="true"
 
-    printf '{"model":"%s","messages":%s,"stream":%s}' "$MODEL" "$messages" "$stream_val"
+    python3 -c "
+import json, sys
+model  = sys.argv[1]
+prompt = sys.argv[2]
+system = sys.argv[3]
+stream = sys.argv[4] == 'true'
+msgs = []
+if system:
+    msgs.append({'role': 'system', 'content': system})
+msgs.append({'role': 'user', 'content': prompt})
+print(json.dumps({'model': model, 'messages': msgs, 'stream': stream}))
+" "$MODEL" "$PROMPT" "$SYSTEM" "$stream_val"
 }
 
 run_streaming() {
@@ -78,18 +85,20 @@ run_streaming() {
     curl -sf -N \
         -H "Content-Type: application/json" \
         -d "$payload" \
-        "$OLLAMA_HOST/api/chat" | while IFS= read -r line; do
-            [[ -z "$line" ]] && continue
-            content=$(printf '%s' "$line" | python3 -c '
-import json,sys
-try:
-    d = json.load(sys.stdin)
-    c = d.get("message", {}).get("content", "")
-    if c: print(c, end="", flush=True)
-except: pass
-')
-            printf '%s' "$content"
-        done
+        "$OLLAMA_HOST/api/chat" | python3 -c '
+import json, sys
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+    try:
+        d = json.loads(line)
+        c = d.get("message", {}).get("content", "")
+        if c:
+            print(c, end="", flush=True)
+    except Exception:
+        pass
+'
     echo ""
 }
 
@@ -105,7 +114,7 @@ run_blocking() {
         printf '%s\n' "$response"
     else
         printf '%s\n' "$response" | python3 -c '
-import json,sys
+import json, sys
 d = json.load(sys.stdin)
 print(d.get("message", {}).get("content", ""))
 '

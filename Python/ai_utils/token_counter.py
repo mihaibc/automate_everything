@@ -59,7 +59,7 @@ def main():
     if args.text:
         text = args.text
     elif not sys.stdin.isatty():
-        text = sys.stdin.read()
+        text = sys.stdin.read().rstrip("\n")
     else:
         parser.print_help()
         sys.exit(1)
