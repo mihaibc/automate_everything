@@ -1,0 +1,42 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "**.sh"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**.py"
+      - "**.sh"
+
+jobs:
+  python-lint:
+    name: Python (flake8)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run flake8
+        run: flake8 . --max-line-length=120 --exclude=.git,__pycache__,.venv --statistics
+
+  shell-lint:
+    name: Shell (shellcheck)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run shellcheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "./Bash"
+          severity: warning

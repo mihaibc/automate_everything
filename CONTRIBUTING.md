@@ -81,6 +81,8 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 - Please do not include sensitive information (like API keys or passwords) in your scripts.
 - Ensure that your contributions are your original work and that you have the right to share them.
 - Contributions that add significant value to the repository are especially encouraged, but even small improvements are appreciated.
+- All contributors are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+- Use the [bug report](.github/ISSUE_TEMPLATE/bug_report.md) or [feature request](.github/ISSUE_TEMPLATE/feature_request.md) templates when opening issues.
 
 ## License
 

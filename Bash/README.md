@@ -7,6 +7,7 @@ This directory contains Bash scripts for Unix/Linux system administration, file 
 
 ## Subdirectories
 
+- **[llm_setup/](llm_setup/)**: Install Ollama, pull models, and run local LLM inference from the command line.
 - **[system_administration/](system_administration/)**: Bash scripts to automate routine system administration tasks.
 - **[file_management/](file_management/)**: Scripts for organizing, renaming, and moving files.
 - **[automation_scripts/](automation_scripts/)**: Various scripts to automate different tasks using Bash.
