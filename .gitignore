@@ -9,6 +9,7 @@ __pycache__/
 htmlcov/
 .venv/
 venv/
+*.egg-info/
 
 # Local AI artifacts
 embedding_index.json

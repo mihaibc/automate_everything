@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Practical automation scripts for developer workflows and local AI setup."
 readme = "README.MD"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
 authors = [
   { name = "Mihai BC" }
 ]
@@ -24,6 +24,9 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.setuptools]
+packages = []
 
 [tool.ruff]
 line-length = 120
