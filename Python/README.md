@@ -1,6 +1,6 @@
 # Python Automation Scripts
 
-This directory contains Python automation scripts that currently focus on file management, AI utilities, and local AI workflows.
+Python scripts for file management, prompt workflows, semantic search, and local AI tooling. Commands below assume you are running from the repository root.
 
 ## Subdirectories
 
@@ -10,23 +10,33 @@ This directory contains Python automation scripts that currently focus on file m
 
 ## How to Use
 
-Install development tooling:
+Install development tooling when you plan to run tests or contribute:
 
 ```bash
 python3 -m pip install -e ".[dev]"
 ```
 
-Install optional AI dependencies:
+Install optional AI dependencies when you want token counting, embedding search, batch inference, or Hugging Face downloads:
 
 ```bash
 python3 -m pip install -e ".[ai]"
 ```
 
-Run a script:
+Inspect a script before using it:
 
 ```bash
 python Python/file_management/move_files.py --help
 python Python/local_ai/ollama_model_report.py --help
+```
+
+Try a safe file move preview:
+
+```bash
+python Python/file_management/move_files.py \
+  --source ~/Downloads \
+  --destination ~/Documents/PDFs \
+  --extensions pdf \
+  --dry-run
 ```
 
 Run tests:

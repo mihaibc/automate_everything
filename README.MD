@@ -1,20 +1,23 @@
 # Automate Everything
 
+[![Checks](https://github.com/mihaibc/automate_everything/actions/workflows/lint.yml/badge.svg)](https://github.com/mihaibc/automate_everything/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Issues](https://img.shields.io/github/issues/mihaibc/automate_everything)](https://github.com/mihaibc/automate_everything/issues)
 [![Stars](https://img.shields.io/github/stars/mihaibc/automate_everything?style=flat)](https://github.com/mihaibc/automate_everything/stargazers)
 
-Practical automation scripts for developer workflows and local AI setup.
+Practical automation scripts for developers who want local AI workflows, safer file operations, and repeatable command-line utilities they can inspect before running.
 
-The repository focuses on scripts that are easy to inspect, safe to run, documented with examples, and covered by lightweight checks. The strongest current areas are local LLM setup, Ollama workflows, AI utilities, and file management helpers.
+This repo is intentionally script-first: small tools, clear commands, safe defaults, and lightweight tests. The strongest current areas are Ollama setup, local model tooling, prompt utilities, semantic search, and file management helpers.
 
 ---
 
 ## Table of Contents
 
+- [Why Use This](#why-use-this)
 - [What's Inside](#whats-inside)
 - [Quick Start](#quick-start)
+- [Local AI Recipes](#local-ai-recipes)
 - [Quality Gates](#quality-gates)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -22,7 +25,16 @@ The repository focuses on scripts that are easy to inspect, safe to run, documen
 
 ---
 
-## What's inside
+## Why Use This
+
+- **Readable by default**: every script is meant to be opened, understood, and adapted.
+- **Safer automation**: file-moving and setup helpers prefer explicit inputs, dry runs, and clear failures.
+- **Local AI friendly**: Ollama, llama.cpp, Hugging Face model downloads, Modelfiles, endpoint checks, and benchmarking are covered.
+- **Contributor ready**: tests, linting, shell checks, issue templates, PR checklist, security notes, and examples are already in place.
+
+---
+
+## What's Inside
 
 | Area | Scripts | Docs |
 | --- | --- | --- |
@@ -50,10 +62,15 @@ cd automate_everything
 python3 -m pip install -e ".[dev]"
 ```
 
-**Count tokens before sending text to an LLM**
+**Install optional AI dependencies**
 
 ```bash
 python3 -m pip install -e ".[ai]"
+```
+
+**Count tokens before sending text to an LLM**
+
+```bash
 echo "Your text here" | python Python/ai_utils/token_counter.py --model gpt-4
 ```
 
@@ -84,7 +101,60 @@ python Python/file_management/move_files.py \
 **Run batch LLM inference from a JSONL file**
 
 ```bash
-python Python/ai_utils/batch_inference.py --input prompts.jsonl --output results.jsonl
+python Python/ai_utils/batch_inference.py \
+  --input examples/prompts/prompts.jsonl \
+  --output results.jsonl
+```
+
+---
+
+## Local AI Recipes
+
+**Inspect local acceleration options**
+
+```bash
+bash Bash/local_ai/check_gpu.sh
+```
+
+**Build llama.cpp**
+
+```bash
+bash Bash/local_ai/install_llama_cpp.sh --accelerator auto --dry-run
+```
+
+Remove `--dry-run` when the planned clone and build path looks right.
+
+**Create a Python local-AI environment**
+
+```bash
+bash Bash/local_ai/setup_python_ai_env.sh --venv .venv-local-ai
+```
+
+**List installed Ollama models**
+
+```bash
+python Python/local_ai/ollama_model_report.py
+```
+
+**Benchmark an Ollama model**
+
+```bash
+python Python/local_ai/benchmark_ollama.py --model llama3 --runs 3
+```
+
+**Generate an Ollama Modelfile**
+
+```bash
+python Python/local_ai/generate_modelfile.py \
+  --from llama3 \
+  --system "You are concise and practical." \
+  --parameter "temperature 0.2"
+```
+
+**Windows Ollama smoke test**
+
+```powershell
+PowerShell/local_ai/Test-LocalAIEndpoint.ps1 -Model llama3
 ```
 
 ---
@@ -125,7 +195,7 @@ New scripts should include:
 
 ## Roadmap
 
-- [ ] More local model runners: llama.cpp server, LM Studio, vLLM, and Open WebUI helpers.
+- [ ] More local model runners: llama.cpp server mode, LM Studio, vLLM, and Open WebUI helpers.
 - [ ] Cross-platform smoke tests for PowerShell scripts.
 - [ ] More file-management helpers with dry-run and rollback support.
 - [ ] Script metadata index for discoverability.
@@ -143,4 +213,4 @@ Contributions are welcome: new scripts, bug fixes, tests, examples, and document
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT. See [LICENSE](LICENSE) for details.

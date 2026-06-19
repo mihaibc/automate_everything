@@ -1,6 +1,6 @@
 # Python - Local AI Utilities
 
-Python helpers for managing local AI models and Ollama workflows.
+Python helpers for model downloads, Ollama model reporting, benchmarking, and Modelfile generation. Commands below assume you are running from the repository root.
 
 ## Scripts
 
@@ -13,17 +13,21 @@ Python helpers for managing local AI models and Ollama workflows.
 
 ## Optional Dependencies
 
-Only `download_hf_model.py` requires an extra dependency:
+Install optional AI dependencies for the full set of local AI helpers:
 
 ```bash
-pip install -r Python/local_ai/requirements.txt
+python3 -m pip install -e ".[ai]"
 ```
+
+Only `download_hf_model.py` requires `huggingface-hub`; it is also listed in [requirements.txt](requirements.txt).
 
 ## Examples
 
 ```bash
 python Python/local_ai/ollama_model_report.py
 python Python/local_ai/benchmark_ollama.py --model llama3 --runs 3
-python Python/local_ai/download_hf_model.py --repo-id some/model --include "*.gguf" --dry-run
+python Python/local_ai/download_hf_model.py --repo-id TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF --include "*.gguf" --dry-run
 python Python/local_ai/generate_modelfile.py --from llama3 --system "You are concise." --parameter "temperature 0.2"
 ```
+
+Use `--dry-run` before downloads when you want to confirm the target repository and file patterns.

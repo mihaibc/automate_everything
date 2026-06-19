@@ -1,6 +1,6 @@
 # PowerShell Automation Scripts
 
-This directory contains PowerShell scripts for Windows-friendly local AI setup and Ollama workflows.
+PowerShell scripts for Windows-friendly local AI setup and Ollama workflows. Commands below assume you are running from the repository root.
 
 ## Subdirectories
 
@@ -8,10 +8,16 @@ This directory contains PowerShell scripts for Windows-friendly local AI setup a
 
 ## How to Use
 
-Run a script:
+Test a local Ollama endpoint:
 
 ```powershell
 PowerShell/local_ai/Test-LocalAIEndpoint.ps1 -Model llama3
+```
+
+Install Ollama with a preview first:
+
+```powershell
+PowerShell/local_ai/Install-Ollama.ps1 -WhatIf
 ```
 
 You may need to set the execution policy for your user:

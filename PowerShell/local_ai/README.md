@@ -1,6 +1,6 @@
 # PowerShell - Local AI Setup
 
-Windows-friendly helpers for Ollama-based local AI workflows.
+Windows-friendly helpers for Ollama-based local AI workflows. Commands below assume you are running from the repository root.
 
 ## Scripts
 
@@ -17,3 +17,5 @@ PowerShell/local_ai/Install-Ollama.ps1 -WhatIf
 PowerShell/local_ai/Pull-OllamaModels.ps1 -Models llama3,mistral
 PowerShell/local_ai/Test-LocalAIEndpoint.ps1 -Model llama3
 ```
+
+Run `Install-Ollama.ps1` without `-WhatIf` when the planned install action looks correct.

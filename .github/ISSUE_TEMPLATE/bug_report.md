@@ -8,14 +8,14 @@ labels: bug
 <!-- A clear and concise description of the bug. -->
 
 ## Steps to reproduce
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
-## Expected behaviour
+## Expected behavior
 <!-- What you expected to happen. -->
 
-## Actual behaviour
+## Actual behavior
 <!-- What actually happened. Include error output if any. -->
 
 ## Environment

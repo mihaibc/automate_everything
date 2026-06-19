@@ -1,7 +1,6 @@
-
 # Bash Automation Scripts
 
-This directory contains Bash scripts for local AI setup and command-line automation.
+Bash scripts for local AI setup, Ollama workflows, hardware checks, and command-line automation. Commands below assume you are running from the repository root.
 
 ## Subdirectories
 
@@ -15,6 +14,14 @@ Run scripts with `bash`:
 ```bash
 bash Bash/llm_setup/run_inference.sh --help
 bash Bash/local_ai/check_gpu.sh
+```
+
+Set up Ollama and run a prompt:
+
+```bash
+bash Bash/llm_setup/install_ollama.sh
+bash Bash/llm_setup/pull_models.sh --models "llama3"
+bash Bash/llm_setup/run_inference.sh --model llama3 --prompt "Explain local inference in one sentence"
 ```
 
 Run shell checks:

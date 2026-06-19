@@ -1,6 +1,6 @@
 # Contributing to Automate Everything
 
-Thank you for your interest in contributing to the **Automate Everything** repository! We welcome contributions from the community to help improve and expand the collection of automation scripts across various languages.
+Thank you for your interest in contributing to **Automate Everything**. The goal is to keep the repository practical, safe to run, and easy for developers to inspect before they trust a script on their machine.
 
 ## How to Contribute
 
@@ -13,7 +13,7 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 - Clone your forked repository to your local machine:
   ```bash
   git clone https://github.com/mihaibc/automate_everything.git
-  cd automate-everything
+  cd automate_everything
   ```
 
 ### 3. Create a New Branch
@@ -30,13 +30,14 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 - Add your new script or modify an existing one.
 - Ensure your code follows the project's coding standards and conventions.
 - Add any necessary documentation or comments to your code.
-- If your script requires specific dependencies, create or update a `requirements.txt` file.
+- If your script requires dependencies, update `pyproject.toml`, a relevant `requirements.txt`, or the closest README.
 
 ### 5. Test Your Changes
 
 - Run your script to make sure it works as expected.
 - Add or update tests for reusable Python behavior.
 - Add a small example when the script expects structured input.
+- Check that new or changed commands work from the repository root.
 - Run the local quality gate:
 
   ```bash
@@ -63,10 +64,7 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 
 - Go to the original repository on GitHub and you should see a prompt to submit a Pull Request (PR).
 - Click on "Compare & pull request".
-- Provide a detailed description of your changes, including:
-  - What the script does.
-  - How to use it.
-  - Any dependencies required.
+- Provide a detailed description of the change: what problem it solves, how to use it, and any dependencies required.
 - Submit the pull request.
 
 ### 9. Review Process
@@ -78,7 +76,7 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 ## Coding Guidelines
 
 - **Readability**: Write clear and understandable code. Use meaningful variable and function names.
-- **Documentation**: Include comments in your code where necessary. Provide a brief explanation at the top of your script describing its purpose.
+- **Documentation**: Include a short script description, README entry, and at least one realistic command.
 - **Consistency**: Follow the coding style used in the repository. For Python, this typically means adhering to PEP 8 standards.
 - **Modularity**: If possible, structure your scripts so they can be reused or easily adapted to other tasks.
 
@@ -112,7 +110,7 @@ For PowerShell:
 
 - Please do not include sensitive information (like API keys or passwords) in your scripts.
 - Ensure that your contributions are your original work and that you have the right to share them.
-- Contributions that add significant value to the repository are especially encouraged, but even small improvements are appreciated.
+- Contributions that add significant value are especially encouraged, but small improvements are appreciated.
 - All contributors are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 - Please read [SECURITY.md](SECURITY.md) before submitting scripts that install tools, move files, or call network endpoints.
 - Use the [bug report](.github/ISSUE_TEMPLATE/bug_report.md) or [feature request](.github/ISSUE_TEMPLATE/feature_request.md) templates when opening issues.
@@ -121,6 +119,4 @@ For PowerShell:
 
 By contributing to this repository, you agree that your contributions will be licensed under the MIT License.
 
----
-
-Thank you for your contributions! Your efforts help make this repository a valuable resource for anyone looking to automate tasks across different platforms and languages.
+Thank you for helping keep the repository useful, careful, and easy to trust.
