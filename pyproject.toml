@@ -1,0 +1,39 @@
+[project]
+name = "automate-everything"
+version = "0.1.0"
+description = "Practical automation scripts for developer workflows and local AI setup."
+readme = "README.MD"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Mihai BC" }
+]
+
+[project.optional-dependencies]
+ai = [
+  "huggingface-hub>=0.23.0",
+  "requests>=2.31.0",
+  "sentence-transformers>=3.0.0",
+  "tiktoken>=0.7.0",
+]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+exclude = [
+  ".git",
+  ".venv",
+  "__pycache__",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

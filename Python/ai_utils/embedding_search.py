@@ -31,7 +31,7 @@ def normalize(vec: list[float]) -> list[float]:
 
 
 def cosine(a: list[float], b: list[float]) -> float:
-    return sum(x * y for x, y in zip(a, b))
+    return sum(x * y for x, y in zip(a, b, strict=False))
 
 
 def cmd_index(args):
@@ -56,7 +56,7 @@ def cmd_index(args):
         "model": args.model,
         "documents": [
             {"path": path, "embedding": normalize(emb.tolist())}
-            for path, emb in zip(paths, raw_embeddings)
+            for path, emb in zip(paths, raw_embeddings, strict=True)
         ],
     }
 

@@ -8,35 +8,28 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-try:
-    import requests
-except ImportError:
-    print("Error: requests not installed. Run: pip install requests", file=sys.stderr)
-    sys.exit(1)
-
 
 def load_prompts(path: str) -> list[dict]:
     """Load prompts from a JSONL file. Each line must be a JSON object with a 'messages' key."""
     prompts = []
     try:
-        f_handle = open(path, encoding="utf-8")
+        with open(path, encoding="utf-8") as f:
+            for i, line in enumerate(f, 1):
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except json.JSONDecodeError as e:
+                    print(f"Warning: skipping line {i} (JSON error: {e})", file=sys.stderr)
+                    continue
+                if "messages" not in obj and "prompt" not in obj:
+                    print(f"Warning: line {i} has no 'messages' or 'prompt' key — skipping", file=sys.stderr)
+                    continue
+                prompts.append({"_line": i, **obj})
     except FileNotFoundError:
         print(f"Error: input file '{path}' not found.", file=sys.stderr)
         sys.exit(1)
-    with f_handle as f:
-        for i, line in enumerate(f, 1):
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                obj = json.loads(line)
-            except json.JSONDecodeError as e:
-                print(f"Warning: skipping line {i} (JSON error: {e})", file=sys.stderr)
-                continue
-            if "messages" not in obj and "prompt" not in obj:
-                print(f"Warning: line {i} has no 'messages' or 'prompt' key — skipping", file=sys.stderr)
-                continue
-            prompts.append({"_line": i, **obj})
     return prompts
 
 
@@ -47,6 +40,18 @@ def run_single(
     timeout: int,
     api_key: str,
 ) -> dict:
+    try:
+        import requests
+    except ImportError:
+        return {
+            "_line": prompt["_line"],
+            "input": {k: v for k, v in prompt.items() if not k.startswith("_")},
+            "output": None,
+            "elapsed_s": 0,
+            "status": "error",
+            "error": "requests not installed. Run: pip install requests",
+        }
+
     headers = {"Content-Type": "application/json"}
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
@@ -140,11 +145,9 @@ Examples:
             pool.submit(run_single, p, args.endpoint, args.model, args.timeout, args.api_key): i
             for i, p in enumerate(prompts)
         }
-        completed = 0
-        for future in as_completed(futures):
+        for completed, future in enumerate(as_completed(futures), 1):
             idx = futures[future]
             results[idx] = future.result()
-            completed += 1
             status = results[idx]["status"]
             line = results[idx]["_line"]
             elapsed = results[idx]["elapsed_s"]
