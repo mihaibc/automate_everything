@@ -1,35 +1,25 @@
 # PowerShell Automation Scripts
 
-This directory contains PowerShell scripts designed for automating tasks in Windows environments, including system administration and Active Directory management.
-
----
+This directory contains PowerShell scripts for Windows-friendly local AI setup and Ollama workflows.
 
 ## Subdirectories
 
-- **[windows_automation/](windows_automation/)**: Scripts to automate various Windows tasks.
-- **[system_administration/](system_administration/)**: PowerShell scripts for system administration tasks.
-- **[active_directory/](active_directory/)**: Scripts for managing and automating Active Directory tasks.
+- **[local_ai/](local_ai/)**: Install Ollama, pull models, and test a local endpoint.
 
-
----
 ## How to Use
 
-1. **Navigate to the relevant subdirectory:**
-   - Choose the folder based on your task.
+Run a script:
 
-2. **Run the PowerShell script:**
-   ```bash
-   ./script_name.ps1
-   ```
+```powershell
+PowerShell/local_ai/Test-LocalAIEndpoint.ps1 -Model llama3
+```
 
-3. **Ensure you have the necessary permissions to execute the script:**
-   - You may need to adjust the execution policy:
-     ```bash
-     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-     ```
---- 
+You may need to set the execution policy for your user:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
 ## Contributing
 
-Contributions are welcome! 
-
-If you have an automation script you'd like to share or improvements to suggest, please follow the contribution guidelines listed in the [CONTRIBUTING.md](../CONTRIBUTING.md)  file.
+Contributions are welcome. New PowerShell scripts should include comment-based help or clear examples, validate external tools, and avoid hard-coded machine-specific paths. See [CONTRIBUTING.md](../CONTRIBUTING.md).

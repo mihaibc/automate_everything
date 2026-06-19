@@ -35,7 +35,13 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 ### 5. Test Your Changes
 
 - Run your script to make sure it works as expected.
-- If possible, include a small test case or example in your script to demonstrate its functionality.
+- Add or update tests for reusable Python behavior.
+- Add a small example when the script expects structured input.
+- Run the local quality gate:
+
+  ```bash
+  make check
+  ```
 
 ### 6. Commit Your Changes
 
@@ -76,12 +82,39 @@ Thank you for your interest in contributing to the **Automate Everything** repos
 - **Consistency**: Follow the coding style used in the repository. For Python, this typically means adhering to PEP 8 standards.
 - **Modularity**: If possible, structure your scripts so they can be reused or easily adapted to other tasks.
 
+## Script Quality Checklist
+
+Every new script should aim for:
+
+- A `--help` path or clear usage block.
+- Safe defaults. Destructive scripts should support `--dry-run`.
+- Clear error messages and non-zero exit codes on failure.
+- No hard-coded secrets, personal paths, or machine-specific assumptions.
+- README documentation with at least one realistic command.
+- Tests for Python functions that transform data, handle paths, parse files, or call reusable logic.
+- Dependency notes in `pyproject.toml`, `requirements.txt`, or the relevant README.
+
+For Bash:
+
+- Use `set -euo pipefail`.
+- Quote variables.
+- Validate required external commands before using them.
+- Prefer building JSON through a real JSON tool or Python when prompts can contain quotes or newlines.
+
+For PowerShell:
+
+- Use `[CmdletBinding()]` when helpful.
+- Prefer parameters over editing variables in the script body.
+- Avoid changing execution policy inside scripts.
+- Return clear errors with `Write-Error` and meaningful exit codes.
+
 ## Additional Notes
 
 - Please do not include sensitive information (like API keys or passwords) in your scripts.
 - Ensure that your contributions are your original work and that you have the right to share them.
 - Contributions that add significant value to the repository are especially encouraged, but even small improvements are appreciated.
 - All contributors are expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+- Please read [SECURITY.md](SECURITY.md) before submitting scripts that install tools, move files, or call network endpoints.
 - Use the [bug report](.github/ISSUE_TEMPLATE/bug_report.md) or [feature request](.github/ISSUE_TEMPLATE/feature_request.md) templates when opening issues.
 
 ## License

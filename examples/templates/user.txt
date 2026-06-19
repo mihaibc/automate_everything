@@ -1,0 +1,1 @@
+Summarize {topic} for a developer who wants to automate it locally.

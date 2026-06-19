@@ -1,30 +1,14 @@
 
 # Go Automation Scripts
 
-This directory contains Go (Golang) scripts aimed at automating cloud infrastructure, CI/CD pipelines, and other high-performance tasks.
+This directory is reserved for future Go automation scripts. There are no Go scripts in the repository yet.
 
-## Subdirectories
+## Planned Areas
 
-- **[cloud_automation/](cloud_automation/)**: Go scripts for automating cloud deployments, managing cloud resources, etc.
-- **[ci_cd/](ci_cd/)**: Scripts for automating Continuous Integration/Continuous Deployment (CI/CD) processes.
+- Cloud automation helpers.
+- CI/CD utilities.
+- Network and API tooling where a compiled binary is useful.
 
-## How to Use
+## Contribution Guidance
 
-1. **Navigate to the relevant subdirectory:**
-   - Go to the specific folder based on the task you are working on.
-
-2. **Review the script and modify any necessary configuration settings.**
-
-3. **Build and run the Go program:**
-   ```bash
-   go build script_name.go
-   ./script_name
-   ```
-
-4. **Ensure your Go environment is set up properly (`go mod tidy` to resolve dependencies).**
-
-## Contributing
-
-Contributions are welcome! 
-
-If you have an automation script you'd like to share or improvements to suggest, please follow the contribution guidelines listed in the [CONTRIBUTING.md](../CONTRIBUTING.md)  file.
+Please add a real use case, README example, tests where practical, and any required `go.mod` files with the first Go contribution. See [CONTRIBUTING.md](../CONTRIBUTING.md).

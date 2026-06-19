@@ -1,27 +1,13 @@
 # C++ Automation Scripts
 
-This directory contains C++ scripts designed for performance-critical automation tasks and low-level system operations.
+This directory is reserved for future C++ automation scripts. There are no C++ scripts in the repository yet.
 
-## Subdirectories
+## Planned Areas
 
-- **[performance_critical/](performance_critical/)**: C++ scripts for tasks where performance is key.
-- **[low_level_system/](low_level_system/)**: Scripts that interact with system hardware or require low-level access.
+- Performance-critical local tools.
+- Low-level system checks.
+- Native helpers for workloads where Python or Bash is too slow.
 
-## How to Use
+## Contribution Guidance
 
-1. **Navigate to the relevant subdirectory:**
-   - Choose the folder that corresponds to your task.
-
-2. **Review and compile the C++ code:**
-   ```bash
-   g++ script_name.cpp -o script_name
-   ./script_name
-   ```
-
-3. **Ensure you have a C++ compiler installed (e.g., GCC, Clang, MSVC).**
-
-## Contributing
-
-Contributions are welcome! 
-
-If you have an automation script you'd like to share or improvements to suggest, please follow the contribution guidelines listed in the [CONTRIBUTING.md](../CONTRIBUTING.md)  file.
+Please include build instructions, platform notes, and a small test or reproducible example with the first C++ contribution. See [CONTRIBUTING.md](../CONTRIBUTING.md).

@@ -5,33 +5,33 @@
 [![Issues](https://img.shields.io/github/issues/mihaibc/automate_everything)](https://github.com/mihaibc/automate_everything/issues)
 [![Stars](https://img.shields.io/github/stars/mihaibc/automate_everything?style=flat)](https://github.com/mihaibc/automate_everything/stargazers)
 
-> A multi-language collection of automation scripts — from file management to local LLM inference setup. Pick a language, grab a script, automate something.
+Practical automation scripts for developer workflows and local AI setup.
+
+The repository focuses on scripts that are easy to inspect, safe to run, documented with examples, and covered by lightweight checks. The strongest current areas are local LLM setup, Ollama workflows, AI utilities, and file management helpers.
 
 ---
 
 ## Table of Contents
 
-- [What's inside](#whats-inside)
+- [What's Inside](#whats-inside)
 - [Quick Start](#quick-start)
-- [Languages](#languages)
+- [Quality Gates](#quality-gates)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
-- [Contributors](#contributors)
 - [License](#license)
 
 ---
 
 ## What's inside
 
-| Language | Category | Scripts | Docs |
-|----------|----------|---------|------|
-| Python | File Management | `create_folder_structure.py`, `move_files.py` | [Python/README.md](Python/README.md) |
-| Python | AI Utils | `token_counter.py`, `prompt_builder.py`, `batch_inference.py`, `embedding_search.py` | [Python/ai_utils/README.md](Python/ai_utils/README.md) |
-| Bash | LLM Setup | `install_ollama.sh`, `pull_models.sh`, `run_inference.sh` | [Bash/README.md](Bash/README.md) |
-| Go | Cloud / CI-CD | *(coming soon)* | [Go/README.md](Go/README.md) |
-| C++ | Performance / Low-level | *(coming soon)* | [C++/README.md](C++/README.md) |
-| Perl | Text Processing | *(coming soon)* | [Perl/README.md](Perl/README.md) |
-| PowerShell | Windows Automation | *(coming soon)* | [PowerShell/README.md](PowerShell/README.md) |
+| Area | Scripts | Docs |
+| --- | --- | --- |
+| Python file management | `create_folder_structure.py`, `move_files.py` | [Python/README.md](Python/README.md) |
+| Python AI utilities | `token_counter.py`, `prompt_builder.py`, `batch_inference.py`, `embedding_search.py` | [Python/ai_utils/README.md](Python/ai_utils/README.md) |
+| Python local AI | `benchmark_ollama.py`, `download_hf_model.py`, `generate_modelfile.py`, `ollama_model_report.py` | [Python/local_ai/README.md](Python/local_ai/README.md) |
+| Bash Ollama setup | `install_ollama.sh`, `pull_models.sh`, `run_inference.sh` | [Bash/README.md](Bash/README.md) |
+| Bash local AI | `check_gpu.sh`, `install_llama_cpp.sh`, `setup_python_ai_env.sh` | [Bash/local_ai/README.md](Bash/local_ai/README.md) |
+| PowerShell local AI | `Install-Ollama.ps1`, `Pull-OllamaModels.ps1`, `Test-LocalAIEndpoint.ps1` | [PowerShell/local_ai/README.md](PowerShell/local_ai/README.md) |
 
 ---
 
@@ -44,10 +44,16 @@ git clone https://github.com/mihaibc/automate_everything.git
 cd automate_everything
 ```
 
+**Install development tools**
+
+```bash
+python3 -m pip install -e ".[dev]"
+```
+
 **Count tokens before sending text to an LLM**
 
 ```bash
-pip install tiktoken
+python3 -m pip install -e ".[ai]"
 echo "Your text here" | python Python/ai_utils/token_counter.py --model gpt-4
 ```
 
@@ -59,53 +65,71 @@ bash Bash/llm_setup/pull_models.sh
 bash Bash/llm_setup/run_inference.sh --prompt "Explain Kubernetes in one sentence"
 ```
 
-**Organise files by extension**
+**Check local AI hardware signals**
 
 ```bash
-python Python/file_management/move_files.py
-# prompts for source path, destination path, and extensions (e.g. pdf,jpg)
+bash Bash/local_ai/check_gpu.sh
+```
+
+**Organize files by extension safely**
+
+```bash
+python Python/file_management/move_files.py \
+  --source ~/Downloads \
+  --destination ~/Documents/PDFs \
+  --extensions pdf \
+  --dry-run
 ```
 
 **Run batch LLM inference from a JSONL file**
 
 ```bash
-pip install requests
 python Python/ai_utils/batch_inference.py --input prompts.jsonl --output results.jsonl
 ```
 
 ---
 
-## Languages
+## Quality Gates
 
-### [Python](Python/README.md)
-General-purpose automation, file management, AI/LLM utilities, web scraping, and data processing. Rich ecosystem, easy to read, widely supported.
+Run the same checks locally that CI runs:
 
-### [Bash](Bash/README.md)
-Unix/Linux system administration, local LLM environment setup, file management, and task scheduling. Excellent for quick glue scripts and shell pipelines.
+```bash
+make check
+```
 
-### [Go](Go/README.md)
-Cloud automation, CI/CD pipelines, and network tooling. High performance, built-in concurrency, ideal for cloud-native tasks.
+Individual commands:
 
-### [C++](C++/README.md)
-Performance-critical automation and low-level system tasks. Direct hardware access and maximum throughput where it counts.
+```bash
+make lint
+make test
+make shellcheck
+make py-compile
+```
 
-### [Perl](Perl/README.md)
-Text processing, log parsing, and legacy system administration. Unmatched for regex-heavy tasks and CPAN ecosystem integration.
+Install `shellcheck` separately if your platform does not include it.
 
-### [PowerShell](PowerShell/README.md)
-Windows system administration, Active Directory management, and automating Windows-based applications. Deep .NET integration.
+---
+
+## Repository Standards
+
+New scripts should include:
+
+- A clear CLI with `--help`.
+- Safe defaults and `--dry-run` for destructive operations.
+- Quoted shell variables and strict Bash mode where relevant.
+- No secrets, tokens, or personal paths.
+- README usage examples.
+- Tests for Python behavior when practical.
 
 ---
 
 ## Roadmap
 
-- [ ] Python — web scraping utilities (`requests`, `BeautifulSoup`)
-- [ ] Python — data processing helpers (`pandas`, `csv`, `json`)
-- [ ] Bash — system administration scripts (disk monitoring, log rotation)
-- [ ] Go — cloud automation (AWS/GCP/Azure CLI wrappers)
-- [ ] Go — CI/CD helpers (build matrix, changelog generator)
-- [ ] PowerShell — Active Directory automation scripts
-- [ ] Perl — log parsing and report generation
+- [ ] More local model runners: llama.cpp server, LM Studio, vLLM, and Open WebUI helpers.
+- [ ] Cross-platform smoke tests for PowerShell scripts.
+- [ ] More file-management helpers with dry-run and rollback support.
+- [ ] Script metadata index for discoverability.
+- [ ] First Go, C++, and Perl scripts after a concrete use case is ready.
 
 Have a script that fits? [Open a feature request](https://github.com/mihaibc/automate_everything/issues/new?template=feature_request.md) or submit a PR.
 
@@ -113,13 +137,7 @@ Have a script that fits? [Open a feature request](https://github.com/mihaibc/aut
 
 ## Contributing
 
-Contributions are welcome — new scripts, bug fixes, documentation improvements. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and follow the [Code of Conduct](CODE_OF_CONDUCT.md) before opening a PR.
-
----
-
-## Contributors
-
-[![Contributors](https://contrib.rocks/image?repo=mihaibc/automate_everything)](https://github.com/mihaibc/automate_everything/graphs/contributors)
+Contributions are welcome: new scripts, bug fixes, tests, examples, and documentation improvements. Please read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and the [Code of Conduct](CODE_OF_CONDUCT.md) before opening a PR.
 
 ---
 

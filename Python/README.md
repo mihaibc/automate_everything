@@ -1,42 +1,40 @@
 # Python Automation Scripts
 
-This directory contains Python scripts designed to automate a wide range of tasks, from file management to web scraping and system administration.
-
----
+This directory contains Python automation scripts that currently focus on file management, AI utilities, and local AI workflows.
 
 ## Subdirectories
 
-- **[file_management/](file_management/)**: Scripts to automate file organization, renaming, moving files based on type, etc.
-- **[web_scraping/](web_scraping/)**: Tools and scripts for extracting data from websites.
-- **[data_processing/](data_processing/)**: Scripts to automate data cleaning, transformation, and analysis tasks.
-- **[system_administration/](system_administration/)**: Python scripts for automating system-related tasks.
-
----
+- **[file_management/](file_management/)**: Folder creation and safe file-moving helpers.
+- **[ai_utils/](ai_utils/)**: Token counting, prompt building, batch inference, and embedding search.
+- **[local_ai/](local_ai/)**: Ollama benchmarking, model reports, Hugging Face downloads, and Modelfile generation.
 
 ## How to Use
 
-1. **Navigate to the relevant subdirectory:**
-   - Depending on the task you want to automate, go to the corresponding folder within the `Python` directory.
+Install development tooling:
 
-2. **Install dependencies (if any):**
-   - Some scripts may require external Python packages. If a `requirements.txt` file is present, install the dependencies using:
-     ```bash
-     pip install -r requirements.txt
-     ```
+```bash
+python3 -m pip install -e ".[dev]"
+```
 
-3. **Run the script:**
-   - Execute the script from the command line:
-     ```bash
-     python script_name.py
-     ```
-   - Replace `script_name.py` with the actual name of the script you want to run.
+Install optional AI dependencies:
 
-4. **Modify the script if necessary:**
-   - Many scripts are designed to be configurable. Open the script in a text editor and modify any parameters or settings as needed before running.
+```bash
+python3 -m pip install -e ".[ai]"
+```
 
---- 
+Run a script:
+
+```bash
+python Python/file_management/move_files.py --help
+python Python/local_ai/ollama_model_report.py --help
+```
+
+Run tests:
+
+```bash
+python3 -m pytest
+```
+
 ## Contributing
 
-Contributions are welcome! 
-
-If you have an automation script you'd like to share or improvements to suggest, please follow the contribution guidelines listed in the [CONTRIBUTING.md](../CONTRIBUTING.md)  file.
+Contributions are welcome. Please include examples, safe defaults, and tests for reusable behavior. See [CONTRIBUTING.md](../CONTRIBUTING.md).

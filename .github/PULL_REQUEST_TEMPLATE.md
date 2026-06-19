@@ -9,12 +9,15 @@
 
 ```bash
 # Example:
-python Python/ai_utils/token_counter.py --text "hello" --model gpt-4
+make check
 ```
 
 ## Checklist
-- [ ] Script runs without errors on a clean environment
+- [ ] Script runs without errors in a clean environment
+- [ ] `make check` passes locally, or I explained why it could not be run
 - [ ] No API keys, passwords, or sensitive data included
 - [ ] README updated if a new script was added
 - [ ] `requirements.txt` updated if new dependencies were added
+- [ ] Python behavior has tests where practical
+- [ ] Destructive operations include dry-run or explicit confirmation
 - [ ] Code follows the style of existing scripts in the same directory
