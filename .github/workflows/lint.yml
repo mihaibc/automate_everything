@@ -6,6 +6,11 @@ on:
     paths:
       - "**.py"
       - "**.sh"
+      - "**.pl"
+      - "**.pm"
+      - "**.t"
+      - "**.md"
+      - "**.MD"
       - "pyproject.toml"
       - "Makefile"
       - ".github/workflows/lint.yml"
@@ -14,6 +19,11 @@ on:
     paths:
       - "**.py"
       - "**.sh"
+      - "**.pl"
+      - "**.pm"
+      - "**.t"
+      - "**.md"
+      - "**.MD"
       - "pyproject.toml"
       - "Makefile"
       - ".github/workflows/lint.yml"
@@ -52,3 +62,34 @@ jobs:
         with:
           scandir: "./Bash"
           severity: warning
+
+  perl:
+    name: Perl syntax and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile Perl scripts
+        run: find Perl -name '*.pl' -type f -print0 | xargs -0 -n1 perl -c
+
+      - name: Run Perl tests
+        run: REPO_ROOT=$(pwd) prove -lr tests/perl
+
+  docs:
+    name: Documentation checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check Markdown links and style
+        run: python scripts/check_markdown.py
+
+      - name: Check authorship markers
+        run: python scripts/check_no_markers.py
+
+      - name: Check whitespace
+        run: git diff --check

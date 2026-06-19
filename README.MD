@@ -44,6 +44,7 @@ This repo is intentionally script-first: small tools, clear commands, safe defau
 | Bash Ollama setup | `install_ollama.sh`, `pull_models.sh`, `run_inference.sh` | [Bash/README.md](Bash/README.md) |
 | Bash local AI | `check_gpu.sh`, `install_llama_cpp.sh`, `setup_python_ai_env.sh` | [Bash/local_ai/README.md](Bash/local_ai/README.md) |
 | PowerShell local AI | `Install-Ollama.ps1`, `Pull-OllamaModels.ps1`, `Test-LocalAIEndpoint.ps1` | [PowerShell/local_ai/README.md](PowerShell/local_ai/README.md) |
+| Perl developer utilities | `jsonl_validate.pl`, `todo_report.pl`, `env_audit.pl`, `replace_in_files.pl`, `log_summary.pl`, `repo_lint.pl` | [Perl/README.md](Perl/README.md) |
 
 ---
 
@@ -174,6 +175,9 @@ make lint
 make test
 make shellcheck
 make py-compile
+make perl-syntax
+make perl-test
+make docs-check
 ```
 
 Install `shellcheck` separately if your platform does not include it.
@@ -199,7 +203,7 @@ New scripts should include:
 - [ ] Cross-platform smoke tests for PowerShell scripts.
 - [ ] More file-management helpers with dry-run and rollback support.
 - [ ] Script metadata index for discoverability.
-- [ ] First Go, C++, and Perl scripts after a concrete use case is ready.
+- [ ] First Go and C++ scripts after a concrete use case is ready.
 
 Have a script that fits? [Open a feature request](https://github.com/mihaibc/automate_everything/issues/new?template=feature_request.md) or submit a PR.
 

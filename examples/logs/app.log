@@ -1,0 +1,5 @@
+2026-06-19 10:00:01 INFO server started
+2026-06-19 10:00:03 WARN cache miss for model metadata
+2026-06-19 10:00:05 ERROR failed to connect to local endpoint
+2026-06-19 10:00:06 ERROR failed to connect to local endpoint
+2026-06-19 10:00:07 DEBUG retry scheduled

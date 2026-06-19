@@ -106,6 +106,13 @@ For PowerShell:
 - Avoid changing execution policy inside scripts.
 - Return clear errors with `Write-Error` and meaningful exit codes.
 
+For Perl:
+
+- Use core modules unless a dependency is clearly worth it.
+- Include `use strict;` and `use warnings;`.
+- Add `--help` and clear non-zero exits for validation failures.
+- Test CLI behavior with `Test::More` and `prove`.
+
 ## Additional Notes
 
 - Please do not include sensitive information (like API keys or passwords) in your scripts.
