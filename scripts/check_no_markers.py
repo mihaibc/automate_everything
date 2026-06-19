@@ -15,7 +15,7 @@ MARKERS = [
     "co-authored",
 ]
 SKIP_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache", ".ruff_cache", "automate_everything.egg-info"}
-SKIP_FILES = {Path("scripts/check_no_markers.py")}
+SKIP_FILES = {Path("LICENSE"), Path("scripts/check_no_markers.py")}
 
 
 def should_skip(path: Path) -> bool:

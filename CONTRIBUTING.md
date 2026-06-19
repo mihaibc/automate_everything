@@ -125,6 +125,6 @@ For Perl:
 
 ## License
 
-By contributing to this repository, you agree that your contributions will be licensed under the MIT License.
+By contributing to this repository, you agree that your contributions will be licensed under the Apache License 2.0.
 
 Thank you for helping keep the repository useful, careful, and easy to trust.

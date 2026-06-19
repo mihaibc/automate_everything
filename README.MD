@@ -1,7 +1,7 @@
 # Automate Everything
 
 [![Checks](https://github.com/mihaibc/automate_everything/actions/workflows/lint.yml/badge.svg)](https://github.com/mihaibc/automate_everything/actions/workflows/lint.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Issues](https://img.shields.io/github/issues/mihaibc/automate_everything)](https://github.com/mihaibc/automate_everything/issues)
 [![Stars](https://img.shields.io/github/stars/mihaibc/automate_everything?style=flat)](https://github.com/mihaibc/automate_everything/stargazers)
@@ -221,4 +221,4 @@ Contributions are welcome: new scripts, bug fixes, tests, examples, and document
 
 ## License
 
-MIT. See [LICENSE](LICENSE) for details.
+Apache-2.0. See [LICENSE](LICENSE) for details.
