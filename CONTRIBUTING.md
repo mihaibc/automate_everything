@@ -90,6 +90,7 @@ Every new script should aim for:
 - No hard-coded secrets, personal paths, or machine-specific assumptions.
 - README documentation with at least one realistic command.
 - Tests for Python functions that transform data, handle paths, parse files, or call reusable logic.
+- A `tests/script_test_map.json` entry for every executable script.
 - Dependency notes in `pyproject.toml`, `requirements.txt`, or the relevant README.
 
 For Bash:

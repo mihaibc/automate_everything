@@ -47,7 +47,9 @@ parse_args() {
         esac
     done
 
-    [[ -z "$PROMPT" ]] && die "--prompt is required"
+    if [[ -z "$PROMPT" ]]; then
+        die "--prompt is required"
+    fi
 }
 
 check_deps() {

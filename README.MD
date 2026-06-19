@@ -175,12 +175,15 @@ make lint
 make test
 make shellcheck
 make py-compile
+make bash-test
 make perl-syntax
 make perl-test
+make powershell-test
 make docs-check
+make script-test
 ```
 
-Install `shellcheck` separately if your platform does not include it.
+Install `shellcheck` separately if your platform does not include it. PowerShell tests skip locally when `pwsh` is unavailable, but CI runs them.
 
 ---
 
@@ -194,6 +197,7 @@ New scripts should include:
 - No secrets, tokens, or personal paths.
 - README usage examples.
 - Tests for Python behavior when practical.
+- A test mapping entry in `tests/script_test_map.json`.
 
 ---
 
